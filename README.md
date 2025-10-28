@@ -58,7 +58,10 @@ name: Deploy site to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'codex/**'
+      - 'dev/**'
   workflow_dispatch:
 
 permissions:
@@ -85,7 +88,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      # ✅ 自動生成 CNAME（例如 wedding-front.kuanlin.pro）
+      # ✅ 自動生成 CNAME
       - name: Generate CNAME automatically
         run: |
           DOMAIN="${SUBDOMAIN}.${BASE_DOMAIN}"
@@ -99,6 +102,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
+
+
 ```
 
 ---
